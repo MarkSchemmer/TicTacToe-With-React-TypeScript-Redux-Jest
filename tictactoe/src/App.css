@@ -4,7 +4,7 @@
 
 .App-logo {
   animation: App-logo-spin infinite 50s linear;
-  height: 20vmin;
+  height: 30vmin;
 }
 
 .App-header {
@@ -23,7 +23,7 @@
 
 .cont {
   display : flex;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 @keyframes App-logo-spin {
