@@ -9,14 +9,12 @@ export const initState = {
 
 
 export function SquareReducer(state = initState, { type, data }){
-    console.log("type from SquareReducer: ", type);
-    console.log("Payload from SquareReducer: ", data);
-    console.log("state from SquareReducer: ", state);
     switch(type){
+      
         case SQUARE_CLICKED : {
-
+            const { square, val } = data;
             return {
-                Value : data.Value, 
+                Value : val, 
             }
         }
         default : 

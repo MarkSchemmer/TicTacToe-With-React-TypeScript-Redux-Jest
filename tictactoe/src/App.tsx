@@ -28,7 +28,7 @@ class App extends Component<IProps> {
         <h1>{this.props.Turn}</h1>
         <div className="cont">
               {/* <Header />  */}
-              <Board Move={History[Turn]} /> 
+              <Board Move={History[Turn]} Turn={Turn} /> 
         </div>
       </div>
     );

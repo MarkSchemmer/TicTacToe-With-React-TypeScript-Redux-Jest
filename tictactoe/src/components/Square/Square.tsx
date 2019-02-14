@@ -5,7 +5,7 @@ import "./Square.css";
 
 interface IProps {
     square : Square, 
-    handleSquareClick : (Value : string | null, id : number) => void 
+    handleSquareClick : (square:Square) => void 
 }
 
 class ComponentSquare extends React.Component<IProps> {
@@ -14,10 +14,10 @@ class ComponentSquare extends React.Component<IProps> {
     }
 
     render() {
-     const { id, Value } = this.props.square;
+     const { Value } = this.props.square;
      const { handleSquareClick } = this.props;
         return (
-                <div onClick={() => handleSquareClick(Value, id) } className="square">
+                <div onClick={() => handleSquareClick(this.props.square) } className="square">
                         { Value }
                 </div>
         );
