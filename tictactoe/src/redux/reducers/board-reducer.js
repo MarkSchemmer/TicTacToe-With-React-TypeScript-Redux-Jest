@@ -4,7 +4,8 @@ import { SQUARE_CLICKED } from "../constants/constants";
 
 export const initState = {
     History : [new Move(jsHelpers.genBoard(), [])],
-    Turn : 0
+    Turn : 0,
+    XIsWinner : null 
 }
 
 export  function board(state = initState, action){
