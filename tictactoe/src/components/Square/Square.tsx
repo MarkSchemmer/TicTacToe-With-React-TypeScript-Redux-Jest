@@ -18,7 +18,7 @@ class ComponentSquare extends React.Component<IProps> {
      const { handleSquareClick } = this.props;
         return (
                 <div onClick={() => handleSquareClick(this.props.square) } className="square">
-                      <span className="value"> { Value }</span>
+                      <span className="value">{ Value }</span>
                 </div>
         );
     }
