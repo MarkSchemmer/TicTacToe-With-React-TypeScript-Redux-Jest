@@ -13,18 +13,16 @@ export  function board(state = initState, action){
      const { type, data } = action;
      switch(type){
         case SQUARE_CLICKED: {
+            
                 let [x,y] = data.square.Coordinate;
                 let val = data.val;
                 let latestMove = state.History[state.Turn]
                 let clone = Object.assign({}, latestMove, { Board : latestMove.Board.slice() });
                 clone.Board[x][y].Value = val;
                 clone.Board.Move = [x,y];
+
                 let obj = Object.assign({}, state, { Turn : state.Turn+1, 
-                                                     History: [
-                                                                ...state.History, 
-                                                                clone
-                                                              ]
-                                                    })
+                                                     History: [ ...state.History, clone ] })
               return obj;
             }
         default :

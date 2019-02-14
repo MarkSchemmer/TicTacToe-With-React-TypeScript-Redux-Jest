@@ -36,17 +36,16 @@ class App extends Component<IProps> {
 }
 
 function mapStateToProps(state:any, props:any) {
-  console.log('from mapStateToProps: ', state);
-  const { board, SquareReducer } = state;
+  console.log('from mapStateToProps: ', props);
+  const { board } = state;
   return {
       Turn : board.Turn, 
-      History : board.History 
+      History : board.History,
   }
 }
 
 function mapToProps(props:any){
   return {
-    Turn : 0
   }
 }
 
