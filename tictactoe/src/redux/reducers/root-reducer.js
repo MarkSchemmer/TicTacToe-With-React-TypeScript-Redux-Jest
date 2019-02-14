@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
-import * as boardReducer from "../reducers/board-reducer";
-let board = boardReducer.board;
+import { board } from "../reducers/board-reducer";
+import { SquareReducer } from "../reducers/square-reducer";
+
 const rootReducer = combineReducers({
     board,
+    SquareReducer
 })
 
 export default rootReducer

@@ -1,5 +1,6 @@
+import store from "../store/genStore";
 
 
-export function SquareClickedAction () {
-
+export function SquareClickedAction (obj) {
+    store.dispatch(obj)
 }

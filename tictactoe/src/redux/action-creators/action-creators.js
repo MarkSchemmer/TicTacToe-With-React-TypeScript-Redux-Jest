@@ -1,8 +1,8 @@
 import * as constants from "../constants/constants";
 
-export function SquareClickedCreator (payload) {
+export function SquareClickedCreator (val, id) {
     return {
         type : constants.SQUARE_CLICKED,
-        payload : payload
+        data : { val, id }
     }
 }
