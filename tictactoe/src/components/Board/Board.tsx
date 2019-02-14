@@ -2,12 +2,14 @@ import React from "react";
 import { Move, Square } from "../../helpers/types/types";
 import ComponentSquare from "../Square/Square";
 import "./Board.css";
-import { SquareClickedCreator } from "../../redux/action-creators/action-creators";
+import { SquareClickedCreator, IsThereWinnerCreator } from "../../redux/action-creators/action-creators";
 import store from "../../redux/store/genStore";
+import { IsWinner } from "../../helpers/javaScriptMethods/jsHelpers";
 
 interface IProps {
   Move : Move,
-  Turn : number 
+  Turn : number,
+  XIsWinner : number | null 
 }
 
 class Board extends React.Component<IProps> {
@@ -22,9 +24,11 @@ class Board extends React.Component<IProps> {
         // check if it has Value
         // alert(id);
         // must pass below actionCreator into action...
-        if(square.Value===null){
+        let IsTieWinLose = () => this.props.XIsWinner === null || this.props.XIsWinner === 4;
+        if(square.Value===null && IsTieWinLose()){
             let val = this.props.Turn % 2 == 0 ? 'X' : 'O';
             store.dispatch(SquareClickedCreator(square, val));
+            if(IsTieWinLose) store.dispatch(IsThereWinnerCreator(IsWinner(this.props.Move.Board)))
         }
             
     }

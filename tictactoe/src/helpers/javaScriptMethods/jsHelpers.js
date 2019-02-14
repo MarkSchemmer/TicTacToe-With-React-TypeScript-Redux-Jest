@@ -15,7 +15,9 @@ export function IsWinner (board){
 
     let nb = board
     .reduce((acc,cur) => acc.concat(cur), [])
-    .map( x => x.val )
+    .map( x => x.Value )
+
+    console.log(nb);
 
     let waysToWin = [
         [0,1,2],

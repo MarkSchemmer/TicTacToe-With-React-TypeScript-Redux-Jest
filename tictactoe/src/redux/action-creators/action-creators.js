@@ -6,3 +6,10 @@ export function SquareClickedCreator (square, val ) {
         data : { square, val } 
     }
 }
+
+export function IsThereWinnerCreator (number) {
+    return {
+        type : constants.IS_THERE_WINNER,
+        data : number 
+    }
+}

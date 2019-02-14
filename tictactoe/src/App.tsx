@@ -8,7 +8,7 @@ import Board from "./components/Board/Board";
 interface IProps {
   Turn : number, 
   History : Array<Move>,
-  XIsWinner : boolean | null 
+  XIsWinner : number | null 
 }
 
 class App extends Component<IProps> {
@@ -18,27 +18,42 @@ class App extends Component<IProps> {
   }
 
 
-  genWhosTurnMessage = () => {
-    return 'Player : ' +  (this.props.Turn % 2 == 0 ? 'X' : 'O');
-  }
-
-  IsThereAWinner = () => {
-    
+  genWhosTurnMessage = (option:number | null ) => {
+     const opton1 = "Player : " +  (this.props.Turn % 2 == 0 ? "X" : "O");
+     const playerX = "Player X Wins!"
+     const playerO = "Player O Wins!"
+     const Tie = "Tie Game!";
+     switch(option){
+       case 1 : {
+         return playerX;
+       }
+       case 2 : {
+         return playerO;
+       }
+       case 3 : {
+         return Tie;
+       }
+       default : 
+          return opton1;
+     }
   }
 
 
   render() {
-    const { History, Turn } = this.props;
+    const { History, Turn, XIsWinner } = this.props;
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </header>
-        <h1 className="board-title turn">{this.genWhosTurnMessage()}</h1>
+        <h1 className="board-title turn">{this.genWhosTurnMessage(this.props.XIsWinner)}</h1>
         <h1 className="board-title move">Move:{this.props.Turn}</h1>
         <div className="cont">
               {/* <Header />  */}
-              <Board Move={History[Turn]} Turn={Turn} /> 
+              <Board 
+                  Move={History[Turn]} 
+                  Turn={Turn} 
+                  XIsWinner={XIsWinner} /> 
         </div>
       </div>
     );
@@ -46,7 +61,7 @@ class App extends Component<IProps> {
 }
 
 function mapStateToProps(state:any, props:any) {
-  console.log('from mapStateToProps: ', state);
+ // console.log('from mapStateToProps: ', state);
   const { board } = state;
   return {
       Turn : board.Turn, 
