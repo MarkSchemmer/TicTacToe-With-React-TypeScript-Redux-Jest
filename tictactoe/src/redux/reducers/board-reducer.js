@@ -1,6 +1,6 @@
 import { Move} from "../../helpers/types/types";
 import * as jsHelpers from "../../helpers/javaScriptMethods/jsHelpers";
-import { SQUARE_CLICKED, IS_THERE_WINNER } from "../constants/constants";
+import { SQUARE_CLICKED, IS_THERE_WINNER, HANDLE_RESTART } from "../constants/constants";
 
 export const initState = {
     History : [new Move(jsHelpers.genBoard(), [])],
@@ -9,8 +9,6 @@ export const initState = {
 }
 
 export  function board(state = initState, action){
-    // console.log('from the board-reducer', state);
-    // console.log('the action is here', action);
      const { type, data } = action;
      switch(type){
         case SQUARE_CLICKED: {
@@ -31,6 +29,14 @@ export  function board(state = initState, action){
             console.log(state);
             let obj = Object.assign({}, state, {XIsWinner : data });
             return obj;
+        }
+        case HANDLE_RESTART : {
+            console.log('you clicked restart!!!!');
+            return {
+                History : [new Move(jsHelpers.genBoard(), [])],
+                Turn : 0,
+                XIsWinner : null
+            }
         }
         default :
             return state;

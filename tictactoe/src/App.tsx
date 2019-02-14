@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import './App.css';
 import { Move } from './helpers/types/types';
 import Board from "./components/Board/Board";
+import store from './redux/store/genStore';
+import { restartCreator } from "./redux/action-creators/action-creators";
 
 interface IProps {
   Turn : number, 
@@ -17,6 +19,18 @@ class App extends Component<IProps> {
     super(props);
   }
 
+
+  canShowButton = (opt:number | null ) => {
+    if(opt !== null){
+      return [1,2,3].includes(opt);
+    } else {
+      return false;
+    }
+  }
+
+  handleRestartClick = () => {
+    store.dispatch(restartCreator());
+  }
 
   genWhosTurnMessage = (option:number | null ) => {
      const opton1 = "Player : " +  (this.props.Turn % 2 == 0 ? "X" : "O");
@@ -55,6 +69,9 @@ class App extends Component<IProps> {
                   Turn={Turn} 
                   XIsWinner={XIsWinner} /> 
         </div>
+
+        { this.canShowButton(XIsWinner) ? <button onClick={() => this.handleRestartClick() } className="play-again">Play Again?</button> : null }
+
       </div>
     );
   }

@@ -13,3 +13,10 @@ export function IsThereWinnerCreator (number) {
         data : number 
     }
 }
+
+export function restartCreator () {
+    return {
+        type : constants.HANDLE_RESTART,
+        data : null 
+    }
+}
