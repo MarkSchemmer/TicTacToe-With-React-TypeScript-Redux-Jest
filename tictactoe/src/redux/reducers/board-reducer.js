@@ -1,4 +1,4 @@
-import { Move} from "../../helpers/types/types";
+import { Move } from "../../helpers/types/types";
 import * as jsHelpers from "../../helpers/javaScriptMethods/jsHelpers";
 import { SQUARE_CLICKED, IS_THERE_WINNER, HANDLE_RESTART, HIGHlIGHT_WINNING_SQUARES } from "../constants/constants";
 
@@ -12,27 +12,23 @@ export const initState = {
 export  function board(state = initState, action){
      const { type, data } = action;
      switch(type){
-        case SQUARE_CLICKED: {
-            
+        case SQUARE_CLICKED : { 
                 let [x,y] = data.square.Coordinate;
                 let val = data.val;
-                let latestMove = state.History[state.Turn]
+                let latestMove = state.History[state.Turn];
                 let clone = Object.assign({}, latestMove, { Board : latestMove.Board.slice() });
                 clone.Board[x][y].Value = val;
                 clone.Move = [x,y];
                 clone.Board.Move = [x,y];
-
                 let obj = Object.assign({}, state, { Turn : state.Turn+1, 
-                                                     History: [ ...state.History, clone ] })
+                                                     History: [ ...state.History, clone ] });
               return obj;
-            }
+        }
         case IS_THERE_WINNER : {
-            console.log(state);
             let obj = Object.assign({}, state, {XIsWinner : data });
             return obj;
         }
         case HANDLE_RESTART : {
-            console.log('you clicked restart!!!!');
             return {
                 History : [new Move(jsHelpers.genBoard(), [])],
                 Turn : 0,
@@ -43,15 +39,14 @@ export  function board(state = initState, action){
         case HIGHlIGHT_WINNING_SQUARES : {
             let winningBoard = state.History[state.Turn].Board;
             let winningSquares = jsHelpers.getWinningSquares(winningBoard);
-            console.log('from hightlight squares case : ',winningSquares);
             winningSquares.forEach(coor => {
                 const [x,y] = coor;
                 winningBoard[x][y].shouldBeHighlighted = true;
-            })
+            });
             let obj = Object.assign({}, state, { History : state.History.slice() });
             obj.History[state.Turn].Board = winningBoard;
 
-            return obj
+            return obj;
         }
         default :
             return state;

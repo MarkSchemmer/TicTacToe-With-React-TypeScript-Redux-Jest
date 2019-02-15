@@ -5,7 +5,7 @@ import './App.css';
 import { Move } from './helpers/types/types';
 import Board from "./components/Board/Board";
 import store from './redux/store/genStore';
-import { restartCreator, highlightWinningSquaresCreator as winningSquares } from "./redux/action-creators/action-creators";
+import { restartCreator, highlightWinningSquaresCreator as winningSquares, highlightWinningSquaresCreator } from "./redux/action-creators/action-creators";
 
 interface IProps {
   Turn : number, 
@@ -23,7 +23,6 @@ class App extends Component<IProps> {
 
   canShowButton = (opt:number | null ) => {
     if(opt !== null){
-     // this.shouldHighLightSquares([1,2].includes(opt));
       return [1,2,3].includes(opt);
     } else {
       return false;
@@ -54,14 +53,14 @@ class App extends Component<IProps> {
      }
   }
 
-  shouldHighLightSquares(should:boolean){
-   if(should) 
-     store.dispatch(winningSquares(should))
+  renderButton = () => {   
+      return  <button onClick={() => this.handleRestartClick() } className="play-again">Play Again?</button>
   }
 
 
   render() {
     const { History, Turn, XIsWinner } = this.props;
+
     return (
       <div className="App">
         <header className="App-header">
@@ -77,7 +76,7 @@ class App extends Component<IProps> {
                   XIsWinner={XIsWinner} /> 
         </div>
 
-        { this.canShowButton(XIsWinner) ? <button onClick={() => this.handleRestartClick() } className="play-again">Play Again?</button> : null }
+        { this.canShowButton(XIsWinner) ? this.renderButton() : null }
 
       </div>
     );

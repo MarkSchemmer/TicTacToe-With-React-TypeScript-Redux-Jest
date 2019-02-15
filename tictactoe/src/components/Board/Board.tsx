@@ -2,7 +2,7 @@ import React from "react";
 import { Move, Square } from "../../helpers/types/types";
 import ComponentSquare from "../Square/Square";
 import "./Board.css";
-import { SquareClickedCreator, IsThereWinnerCreator } from "../../redux/action-creators/action-creators";
+import { SquareClickedCreator, IsThereWinnerCreator, highlightWinningSquaresCreator } from "../../redux/action-creators/action-creators";
 import store from "../../redux/store/genStore";
 import { IsWinner } from "../../helpers/javaScriptMethods/jsHelpers";
 
@@ -20,17 +20,17 @@ class Board extends React.Component<IProps> {
     }
 
     handleSquareClick(square : Square) {
-        // Find the Square by Id
-        // check if it has Value
-        // alert(id);
-        // must pass below actionCreator into action...
-        let IsTieWinLose = () => this.props.XIsWinner === null || this.props.XIsWinner === 4;
-        if(square.Value===null && IsTieWinLose()){
+        if(square.Value===null && [4, null].includes(this.props.XIsWinner)){
             let val = this.props.Turn % 2 == 0 ? 'X' : 'O';
             store.dispatch(SquareClickedCreator(square, val));
-            if(IsTieWinLose) store.dispatch(IsThereWinnerCreator(IsWinner(this.props.Move.Board)))
+            let _isWinner = IsWinner(this.props.Move.Board);
+            if(_isWinner===1 || _isWinner===2){
+                store.dispatch(IsThereWinnerCreator(_isWinner));
+                store.dispatch(highlightWinningSquaresCreator(true));
+            } else {
+                store.dispatch(IsThereWinnerCreator(_isWinner));
+            }  
         }
-            
     }
 
     render(){
