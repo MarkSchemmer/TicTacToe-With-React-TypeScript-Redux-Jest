@@ -1,11 +1,12 @@
 import { Move} from "../../helpers/types/types";
 import * as jsHelpers from "../../helpers/javaScriptMethods/jsHelpers";
-import { SQUARE_CLICKED, IS_THERE_WINNER, HANDLE_RESTART } from "../constants/constants";
+import { SQUARE_CLICKED, IS_THERE_WINNER, HANDLE_RESTART, HIGHlIGHT_WINNING_SQUARES } from "../constants/constants";
 
 export const initState = {
     History : [new Move(jsHelpers.genBoard(), [])],
     Turn : 0,
-    XIsWinner : null 
+    XIsWinner : null, 
+    winningSquares : null 
 }
 
 export  function board(state = initState, action){
@@ -37,6 +38,20 @@ export  function board(state = initState, action){
                 Turn : 0,
                 XIsWinner : null
             }
+        }
+
+        case HIGHlIGHT_WINNING_SQUARES : {
+            let winningBoard = state.History[state.Turn].Board;
+            let winningSquares = jsHelpers.getWinningSquares(winningBoard);
+            console.log('from hightlight squares case : ',winningSquares);
+            winningSquares.forEach(coor => {
+                const [x,y] = coor;
+                winningBoard[x][y].shouldBeHighlighted = true;
+            })
+            let obj = Object.assign({}, state, { History : state.History.slice() });
+            obj.History[state.Turn].Board = winningBoard;
+
+            return obj
         }
         default :
             return state;

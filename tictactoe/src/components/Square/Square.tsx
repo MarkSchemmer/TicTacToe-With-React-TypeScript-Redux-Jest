@@ -14,10 +14,10 @@ class ComponentSquare extends React.Component<IProps> {
     }
 
     render() {
-     const { Value } = this.props.square;
+     const { Value, shouldBeHighlighted } = this.props.square;
      const { handleSquareClick } = this.props;
         return (
-                <div onClick={() => handleSquareClick(this.props.square) } className="square">
+                <div onClick={() => handleSquareClick(this.props.square) } className={"square" + (shouldBeHighlighted ? " winner" : "")} >
                       <span className="value">{ Value }</span>
                 </div>
         );

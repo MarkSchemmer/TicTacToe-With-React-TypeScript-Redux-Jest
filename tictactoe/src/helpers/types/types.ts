@@ -22,10 +22,12 @@ export class Square implements ISquare {
     public Value : string | null;
     public Coordinate : Array<number>;
     public id : number;
+    public shouldBeHighlighted : boolean | null;
     constructor(x:number, y:number, id:number){
         this.Value = null; 
         this.Coordinate  = [x,y];
         this.id = id;
+        this.shouldBeHighlighted = false;
     }
 }
 

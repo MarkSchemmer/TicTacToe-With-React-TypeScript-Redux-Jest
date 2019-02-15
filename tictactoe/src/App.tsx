@@ -5,12 +5,13 @@ import './App.css';
 import { Move } from './helpers/types/types';
 import Board from "./components/Board/Board";
 import store from './redux/store/genStore';
-import { restartCreator } from "./redux/action-creators/action-creators";
+import { restartCreator, highlightWinningSquaresCreator as winningSquares } from "./redux/action-creators/action-creators";
 
 interface IProps {
   Turn : number, 
   History : Array<Move>,
-  XIsWinner : number | null 
+  XIsWinner : number | null, 
+  winningSquares : Array<Array<number>> | null 
 }
 
 class App extends Component<IProps> {
@@ -22,6 +23,7 @@ class App extends Component<IProps> {
 
   canShowButton = (opt:number | null ) => {
     if(opt !== null){
+     // this.shouldHighLightSquares([1,2].includes(opt));
       return [1,2,3].includes(opt);
     } else {
       return false;
@@ -50,6 +52,11 @@ class App extends Component<IProps> {
        default : 
           return opton1;
      }
+  }
+
+  shouldHighLightSquares(should:boolean){
+   if(should) 
+     store.dispatch(winningSquares(should))
   }
 
 
@@ -83,7 +90,8 @@ function mapStateToProps(state:any, props:any) {
   return {
       Turn : board.Turn, 
       History : board.History,
-      XIsWinner : board.XIsWinner
+      XIsWinner : board.XIsWinner, 
+      winningSquares : board.winningSquares
   }
 }
 

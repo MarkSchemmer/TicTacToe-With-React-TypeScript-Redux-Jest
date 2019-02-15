@@ -20,3 +20,11 @@ export function restartCreator () {
         data : null 
     }
 }
+
+
+export function highlightWinningSquaresCreator(data) {
+    return {
+        type : constants.HIGHlIGHT_WINNING_SQUARES,
+        data : data
+    }
+}
