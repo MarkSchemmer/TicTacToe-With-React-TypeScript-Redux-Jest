@@ -5,7 +5,7 @@ import './App.css';
 import { Move } from './helpers/types/types';
 import Board from "./components/Board/Board";
 import store from './redux/store/genStore';
-import { restartCreator, highlightWinningSquaresCreator as winningSquares, highlightWinningSquaresCreator } from "./redux/action-creators/action-creators";
+import { restartCreator } from "./redux/action-creators/action-creators";
 
 interface IProps {
   Turn : number, 
@@ -35,8 +35,8 @@ class App extends Component<IProps> {
 
   genWhosTurnMessage = (option:number | null ) => {
      const opton1 = "Player : " +  (this.props.Turn % 2 == 0 ? "X" : "O");
-     const playerX = "Player X Wins!"
-     const playerO = "Player O Wins!"
+     const playerX = "Player X Wins!";
+     const playerO = "Player O Wins!";
      const Tie = "Tie Game!";
      switch(option){
        case 1 : {
@@ -84,7 +84,6 @@ class App extends Component<IProps> {
 }
 
 function mapStateToProps(state:any, props:any) {
- // console.log('from mapStateToProps: ', state);
   const { board } = state;
   return {
       Turn : board.Turn, 

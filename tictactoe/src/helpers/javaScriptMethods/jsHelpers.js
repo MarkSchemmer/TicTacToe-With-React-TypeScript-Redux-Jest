@@ -45,13 +45,9 @@ export function getWinningSquares (board) {
     .reduce((acc,cur) => acc.concat(cur), [])
     .map( x => x )
 
-    console.log(nb)
-
     let _nb = board
     .reduce((acc,cur) => acc.concat(cur), [])
-    .map( x => x.Value );
-
-    console.log(_nb)
+    .map( x => x.Value )
 
     let waysToWin = [
         [0,1,2],
@@ -71,11 +67,9 @@ export function getWinningSquares (board) {
 
 
         if(threeInRow('X', waysToWin[i], _nb)){
-            console.log(nb)
             return [a,b,c].map(x => nb[x].Coordinate)
         }
         else if (threeInRow('O', waysToWin[i], _nb)){
-            console.log(nb)
             return [a,b,c].map(x => nb[x].Coordinate)
         }
            
