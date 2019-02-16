@@ -14,7 +14,7 @@ class Header extends React.Component<IProps> {
     render () {
         return (
             <div className="header">
-                {this.props.History.map((x, idx) => <HistoryMove key={idx} /> )}
+                {this.props.History.map((x, idx) => <HistoryMove key={idx} Turn={idx} Coordinates={x.Move} /> )}
             </div>
         );
     }
