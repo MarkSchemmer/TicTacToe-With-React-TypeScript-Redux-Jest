@@ -3,10 +3,12 @@ import * as jsHelpers from "../../helpers/javaScriptMethods/jsHelpers";
 import { SQUARE_CLICKED, IS_THERE_WINNER, HANDLE_RESTART, HIGHlIGHT_WINNING_SQUARES } from "../constants/constants";
 
 export const initState = {
+    board : {
     History : [new Move(jsHelpers.genBoard(), [])],
     Turn : 0,
     XIsWinner : null, 
-    winningSquares : null 
+    winningSquares : null
+    } 
 }
 
 export  function board(state = initState, action){
