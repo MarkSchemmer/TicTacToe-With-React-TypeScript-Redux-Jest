@@ -6,6 +6,7 @@ import { Move } from './helpers/types/types';
 import Board from "./components/Board/Board";
 import store from './redux/store/genStore';
 import { restartCreator } from "./redux/action-creators/action-creators";
+import Header from './components/Header/Header';
 
 interface IProps {
   Turn : number, 
@@ -69,7 +70,7 @@ class App extends Component<IProps> {
         <h1 className="board-title turn">{this.genWhosTurnMessage(this.props.XIsWinner)}</h1>
         <h1 className="board-title move">Move:{this.props.Turn}</h1>
         <div className="cont">
-              {/* <Header />  */}
+              <Header History={History} />  
               <Board 
                   Move={History[Turn]} 
                   Turn={Turn} 
