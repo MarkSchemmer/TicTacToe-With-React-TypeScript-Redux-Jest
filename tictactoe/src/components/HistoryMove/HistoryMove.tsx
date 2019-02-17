@@ -1,6 +1,8 @@
 import React from "react";
 import "./HistoryMove.css";
 import { genBoard } from "../../helpers/javaScriptMethods/jsHelpers";
+import store from "../../redux/store/genStore";
+import { changeTurnCreator } from "../../redux/action-creators/action-creators";
 
 interface IProps {
     Turn : number,
@@ -12,7 +14,12 @@ class HistoryMove extends React.Component<IProps> {
         super(props);
     }
 
-    genButton = (text:string) => <button className="history-button">{text}</button>
+    handleButtonClick = () => {
+        store.dispatch(changeTurnCreator(this.props.Turn));
+    }
+
+    genButton = (text:string) => <button 
+    className="history-button" onClick={() => this.handleButtonClick()}>{text}</button>
 
     IsInitialTurn = () => {
         if(this.props.Turn === 0){

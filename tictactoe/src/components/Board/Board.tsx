@@ -19,11 +19,21 @@ class Board extends React.Component<IProps> {
         this.handleSquareClick = this.handleSquareClick.bind(this);
     }
 
+    handleGettingValue = () => {
+
+    }
+
+    handleGettingWinningSquare = () => {
+
+    }
+
     handleSquareClick(square : Square) {
         if(square.Value===null && [4, null].includes(this.props.XIsWinner)){
             let val = this.props.Turn % 2 == 0 ? 'X' : 'O';
             store.dispatch(SquareClickedCreator(square, val));
-            let _isWinner = IsWinner(this.props.Move.Board);
+            let turn = store.getState().board.Turn 
+            let latestBoard = store.getState().board.History[turn].Board;
+            let _isWinner = IsWinner(latestBoard);
             if(_isWinner===1 || _isWinner===2){
                 store.dispatch(IsThereWinnerCreator(_isWinner));
                 store.dispatch(highlightWinningSquaresCreator(true));

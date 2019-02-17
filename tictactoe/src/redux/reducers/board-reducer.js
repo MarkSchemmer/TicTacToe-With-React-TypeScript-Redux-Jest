@@ -1,6 +1,6 @@
 import { Move } from "../../helpers/types/types";
 import * as jsHelpers from "../../helpers/javaScriptMethods/jsHelpers";
-import { SQUARE_CLICKED, IS_THERE_WINNER, HANDLE_RESTART, HIGHlIGHT_WINNING_SQUARES } from "../constants/constants";
+import { SQUARE_CLICKED, IS_THERE_WINNER, HANDLE_RESTART, HIGHlIGHT_WINNING_SQUARES, CHANGE_TURN} from "../constants/constants";
 
 export const initState = {
     board : {
@@ -15,19 +15,24 @@ export  function board(state = initState, action){
      const { type, data } = action;
      switch(type){
         case SQUARE_CLICKED : { 
+                // state = JSON.parse(JSON.stringify(state));
                 let [x,y] = data.square.Coordinate;
                 let val = data.val;
-                let latestMove = state.History[state.Turn];
-                let clone =  Object.assign({}, latestMove, { Board : latestMove.Board.slice() });
+                let _hist = JSON.parse(JSON.stringify(state));
+
+                _hist.History = _hist.History.slice(0, _hist.Turn+1);
+
+                let latestMove = JSON.parse(JSON.stringify(_hist.History[_hist.Turn]));
+                let clone =  Object.assign({}, latestMove);
                 clone.Board[x][y].Value = val;
                 clone.Move = [x,y];
                 clone.Board.Move = [x,y];
-                let obj = JSON.parse(JSON.stringify(Object.assign({}, state, { Turn : state.Turn+1, 
-                                                     History: [ ...state.History, clone ] })));
+                let obj = JSON.parse(JSON.stringify(Object.assign({}, _hist, { Turn : _hist.Turn+1, 
+                                                     History: [ ..._hist.History, clone ] })));
               return obj;
         }
         case IS_THERE_WINNER : {
-            let obj = Object.assign({}, state, {XIsWinner : data });
+            let obj = JSON.parse(JSON.stringify(Object.assign({}, state, {XIsWinner : data })));
             return obj;
         }
         case HANDLE_RESTART : {
@@ -39,15 +44,19 @@ export  function board(state = initState, action){
         }
 
         case HIGHlIGHT_WINNING_SQUARES : {
-            let winningBoard = state.History[state.Turn].Board;
+            let winningBoard = JSON.parse(JSON.stringify(state.History[state.Turn].Board));
             let winningSquares = jsHelpers.getWinningSquares(winningBoard);
             winningSquares.forEach(coor => {
                 const [x,y] = coor;
                 winningBoard[x][y].shouldBeHighlighted = true;
             });
-            let obj = Object.assign({}, state, { History : state.History.slice() });
+            let obj = JSON.parse(JSON.stringify(Object.assign({}, state, { History : state.History.slice() })));
             obj.History[state.Turn].Board = winningBoard;
 
+            return obj;
+        }
+        case CHANGE_TURN : {
+            let obj = Object.assign({}, JSON.parse(JSON.stringify(state)), { Turn : data });
             return obj;
         }
         default :

@@ -28,3 +28,10 @@ export function highlightWinningSquaresCreator(data) {
         data : data
     }
 }
+
+export function changeTurnCreator (data) {
+    return {
+        type : constants.CHANGE_TURN, 
+        data : data 
+    }
+}
