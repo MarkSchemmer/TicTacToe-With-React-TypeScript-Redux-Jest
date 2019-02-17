@@ -8,8 +8,7 @@ interface IProps {
 }
 
 class HistoryMove extends React.Component<IProps> {
-    constructor(props:any){
-        
+    constructor(props:any){    
         super(props);
     }
 

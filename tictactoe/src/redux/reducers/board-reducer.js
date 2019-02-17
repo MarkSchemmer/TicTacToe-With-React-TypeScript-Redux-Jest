@@ -18,12 +18,12 @@ export  function board(state = initState, action){
                 let [x,y] = data.square.Coordinate;
                 let val = data.val;
                 let latestMove = state.History[state.Turn];
-                let clone = Object.assign({}, latestMove, { Board : latestMove.Board.slice() });
+                let clone =  Object.assign({}, latestMove, { Board : latestMove.Board.slice() });
                 clone.Board[x][y].Value = val;
                 clone.Move = [x,y];
                 clone.Board.Move = [x,y];
-                let obj = Object.assign({}, state, { Turn : state.Turn+1, 
-                                                     History: [ ...state.History, clone ] });
+                let obj = JSON.parse(JSON.stringify(Object.assign({}, state, { Turn : state.Turn+1, 
+                                                     History: [ ...state.History, clone ] })));
               return obj;
         }
         case IS_THERE_WINNER : {
