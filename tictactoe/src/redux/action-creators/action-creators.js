@@ -35,3 +35,10 @@ export function changeTurnCreator (data) {
         data : data 
     }
 }
+
+export function highlightButtonCreator (data) {
+    return {
+        type : constants.HIGHLIGHT_BUTTON, 
+        data : data 
+    }
+}

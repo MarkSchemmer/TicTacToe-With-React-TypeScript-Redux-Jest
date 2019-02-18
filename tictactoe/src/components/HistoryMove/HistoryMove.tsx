@@ -2,7 +2,7 @@ import React from "react";
 import "./HistoryMove.css";
 import { genBoard } from "../../helpers/javaScriptMethods/jsHelpers";
 import store from "../../redux/store/genStore";
-import { changeTurnCreator } from "../../redux/action-creators/action-creators";
+import { changeTurnCreator, highlightButtonCreator } from "../../redux/action-creators/action-creators";
 
 interface IProps {
     Turn : number,
@@ -16,12 +16,19 @@ class HistoryMove extends React.Component<IProps> {
 
     handleButtonClick = () => {
         store.dispatch(changeTurnCreator(this.props.Turn));
+        store.dispatch(highlightButtonCreator(this.props.Turn));
+    }
+
+    handleClickOffButton = () => {
+        store.dispatch(highlightButtonCreator(null));
     }
 
     genButton = (text:string) => <button 
-    className="history-button" onClick={() => this.handleButtonClick()}>{text}</button>
+    className={"history-button" + (store.getState().board.highlightedButton===this.props.Turn ? " bold-button" : "" )} onClick={() => this.handleButtonClick()}>{text}</button>
 
     IsInitialTurn = () => {
+        console.log(store.getState().board);
+        console.log(this.props.Turn === store.getState().board.highlightedButton);
         if(this.props.Turn === 0){
             return this.genButton("Game Start");
         } else {

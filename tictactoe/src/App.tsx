@@ -12,7 +12,8 @@ interface IProps {
   Turn : number, 
   History : Array<Move>,
   XIsWinner : number | null, 
-  winningSquares : Array<Array<number>> | null 
+  winningSquares : Array<Array<number>> | null, 
+  highlightedButton : number | null 
 }
 
 class App extends Component<IProps> {
@@ -90,7 +91,8 @@ function mapStateToProps(state:any, props:any) {
       Turn : board.Turn, 
       History : board.History,
       XIsWinner : board.XIsWinner, 
-      winningSquares : board.winningSquares
+      winningSquares : board.winningSquares,
+      highlightedButton : board.highlightedButton 
   }
 }
 

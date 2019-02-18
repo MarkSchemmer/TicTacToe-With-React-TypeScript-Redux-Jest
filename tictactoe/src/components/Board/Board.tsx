@@ -19,14 +19,6 @@ class Board extends React.Component<IProps> {
         this.handleSquareClick = this.handleSquareClick.bind(this);
     }
 
-    handleGettingValue = () => {
-
-    }
-
-    handleGettingWinningSquare = () => {
-
-    }
-
     handleSquareClick(square : Square) {
         if(square.Value===null && [4, null].includes(this.props.XIsWinner)){
             let val = this.props.Turn % 2 == 0 ? 'X' : 'O';
