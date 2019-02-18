@@ -5,7 +5,7 @@ import './App.css';
 import { Move } from './helpers/types/types';
 import Board from "./components/Board/Board";
 import store from './redux/store/genStore';
-import { restartCreator } from "./redux/action-creators/action-creators";
+import { restartCreator, changeTurnCreator, highlightButtonCreator } from "./redux/action-creators/action-creators";
 import Header from './components/Header/Header';
 
 interface IProps {
@@ -35,6 +35,15 @@ class App extends Component<IProps> {
     store.dispatch(restartCreator());
   }
 
+  handleSlowReplayMode = (start:number=0) => {
+    if(start >= store.getState().board.History.length) return 
+    setTimeout(() => {
+      store.dispatch(changeTurnCreator(start));
+      store.dispatch(highlightButtonCreator(start));
+      this.handleSlowReplayMode(start+1);
+    }, 900);
+  }
+
   genWhosTurnMessage = (option:number | null ) => {
      const opton1 = "Player : " +  (this.props.Turn % 2 == 0 ? "X" : "O");
      const playerX = "Player X Wins!";
@@ -56,7 +65,12 @@ class App extends Component<IProps> {
   }
 
   renderButton = () => {   
-      return  <button onClick={() => this.handleRestartClick() } className="play-again">Play Again?</button>
+      return ( 
+          <React.Fragment>
+            <button onClick={() => this.handleRestartClick() } className="play-again">Play Again?</button> 
+            <button onClick={() => this.handleSlowReplayMode() } className="play-again">Replay of games</button>
+          </React.Fragment>
+        );
   }
 
 
