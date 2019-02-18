@@ -27,8 +27,6 @@ class HistoryMove extends React.Component<IProps> {
     className={"history-button" + (store.getState().board.highlightedButton===this.props.Turn ? " bold-button" : "" )} onClick={() => this.handleButtonClick()}>{text}</button>
 
     IsInitialTurn = () => {
-        console.log(store.getState().board);
-        console.log(this.props.Turn === store.getState().board.highlightedButton);
         if(this.props.Turn === 0){
             return this.genButton("Game Start");
         } else {

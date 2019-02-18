@@ -35,7 +35,7 @@ class Board extends React.Component<IProps> {
         }
     }
 
-    render(){
+    render() {
         const { Board } = this.props.Move;
         return (
             <div className="board">

@@ -8,7 +8,7 @@
 }
 
 .App-header {
-  min-height: 40vh;
+  min-height: 20vh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -22,6 +22,11 @@
 
 .cont {
   display : flex;
+  max-width: 800px;
+  margin-left:auto;
+  margin-right: auto;
+  padding:0px 25px 25px 25px;
+  margin-bottom: 200px;
   /* border: 1px solid black; */
 }
 
@@ -37,6 +42,8 @@
   padding-top: 10px;
   padding-bottom: 10px;
   margin:15px;
+  position: relative;
+  bottom:220px;
 }
 
 @keyframes App-logo-spin {
@@ -47,3 +54,6 @@
     transform: rotate(360deg);
   }
 }
+
+
+
