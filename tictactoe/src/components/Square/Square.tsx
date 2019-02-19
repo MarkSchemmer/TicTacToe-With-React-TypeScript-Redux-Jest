@@ -1,5 +1,6 @@
 import React from "react";
 import { Square } from "../../helpers/types/types";
+
 import "./Square.css";
 
 
@@ -17,7 +18,9 @@ class ComponentSquare extends React.Component<IProps> {
      const { Value, shouldBeHighlighted } = this.props.square;
      const { handleSquareClick } = this.props;
         return (
-                <div onClick={() => handleSquareClick(this.props.square) } className={"square" + (shouldBeHighlighted ? " winner" : "")} >
+                <div 
+                onClick={() => handleSquareClick(this.props.square) } 
+                className={"square" + (shouldBeHighlighted ? " winner" : "")} >
                       <span className="value">{ Value }</span>
                 </div>
         );

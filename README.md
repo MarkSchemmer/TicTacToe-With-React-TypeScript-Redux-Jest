@@ -23,6 +23,13 @@ many setState calls happen at once.
 - GIT (for source control)
 
 
+## Documentation used:
+
+- [Enzyme](https://airbnb.io/enzyme/)
+- [Redux](https://redux.js.org/introduction/getting-started) 
+- [create-react-app](https://facebook.github.io/create-react-app/docs/running-tests) test information 
+
+
 
 ## Demonstration of TicTacToe app
 
@@ -39,6 +46,6 @@ many setState calls happen at once.
 
 - git clone https://github.com/MarkSchemmer/TicTacToe-With-React-TypeScript-Redux-Jest.git
 - open command line, "cd tictactoe"
-- "npm i"
+- "npm i" (You might have to install node) 
 - "npm start" 
-- presto! You might have to install node 
+- presto! 
