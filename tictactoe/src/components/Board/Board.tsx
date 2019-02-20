@@ -14,7 +14,7 @@ interface IProps {
 
 class Board extends React.Component<IProps> {
 
-    constructor(props:any){
+    constructor(props:any) {
         super(props);
         this.handleSquareClick = this.handleSquareClick.bind(this);
     }
